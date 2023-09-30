@@ -1,6 +1,6 @@
 # Contact Form Inbox Report Mailer
 
-[Contact Form Inbox Report Mailer](https://wordpress.org/plugins/contact-form-inbox-report-mailer/) sends email reports of contact form inbox entries, including possible spam. Requires Contact Form 7 and Flamingo plugins! This is free software as-is with absolutely no warranty! Feel free to contribute on GitHub to report problems and add missing features!
+Contact Form Inbox Report Mailer sends email reports of contact form inbox entries, including possible spam. Requires Contact Form 7 and Flamingo plugins! This is free software as-is with absolutely no warranty! Feel free to contribute on GitHub to report problems and add missing features!
 
 ![Screenshot collage](contact-form-inbox-report-mailer/assets/banner-772x250.png)
 
@@ -12,6 +12,8 @@ Install and activate the plugin.
 
 ### Roadmap / TODO
 
+- release on WordPress.org
+- add WP URL to GitHub README, e.g. https://wordpress.org/plugins/contact-form-inbox-report-mailer/
 - configuration option for cron time interval
 - configuration option for reported time interval
 - configuration option to include or omit non-spam messages
@@ -78,3 +80,13 @@ Run `incompatibility-status/trunk/readme.txt` through the official [WordPress Re
 ### Tag Versions in Git vs. SVN
 
 Development milestones that do not correspond to official releases, should be tagged as subversions (e.g `1.1.1` -> `1.1.2`) only in git, so that we only release major and minor versions in the official WordPress directory svn repository. We could also use suffixes in git, like during a review process, where we have to submit subsequent refined versions of the same target release tag, e.g. `1.0.0-rc3` for the third release candidate of the official `1.0.0` release.
+
+### Local development enviroment
+
+```
+composer install
+npm install
+docker-compose up
+```
+
+open http://localhost:8000/

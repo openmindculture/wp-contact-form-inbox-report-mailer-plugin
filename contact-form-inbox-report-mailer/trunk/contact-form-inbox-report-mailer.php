@@ -21,6 +21,11 @@
 
 if (is_admin()) {
 
+	// - receive = send emails or other notifications
+	//- regular = using a scheduler like wp-cron
+	//- reports = output a human-readable list
+	//- about inbound messages = query Flamingo database
+
 	function openmindculture_contactFormInboxReportMailer()
 	{
 		$messages = [];
