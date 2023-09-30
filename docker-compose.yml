@@ -1,0 +1,68 @@
+version: '3.3'
+services:
+
+  db:
+    container_name: 'local-wp-db'
+    image: 'mysql:5.7'
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+        - '18766:3306'
+    environment:
+        MYSQL_ROOT_PASSWORD: somewordpress
+        MYSQL_DATABASE: wordpress_db
+        MYSQL_USER: wordpress_user
+        MYSQL_PASSWORD: wordpress_password
+
+  wordpress:
+    container_name: 'local-wp'
+    depends_on:
+      - db
+    image: 'wordpress:latest'
+    # image: 'wordpress:beta-6.3-RC2-php8.0'
+    ports:
+      - '8000:80'
+    environment:
+      WORDPRESS_DB_HOST: 'db:3306'
+      WORDPRESS_DB_USER: wordpress_user
+      WORDPRESS_DB_PASSWORD: wordpress_password
+      WORDPRESS_DB_NAME: wordpress_db
+    volumes:
+      - "./wp_data:/var/www/html"
+      - "./themes:/var/www/html/wp-content/themes"
+      - "./contact-form-inbox-report-mailer/trunk:/var/www/html/wp-content/plugins/contact-form-inbox-report-mailer"
+
+  wordpress-cli:
+    container_name: 'local-wp-cli'
+    depends_on:
+      - db
+      - wordpress
+    image: wordpress:cli
+    # Run wordpress-cli with the same user-id as wordpress
+    # to avoid general permission problems:
+    user: "33:33"
+    environment:
+      WORDPRESS_DB_HOST: 'db:3306'
+      WORDPRESS_DB_USER: wordpress_user
+      WORDPRESS_DB_PASSWORD: wordpress_password
+      WORDPRESS_DB_NAME: wordpress_db
+      # fix default cache dir went to inaccessible directory:
+      WP_CLI_CACHE_DIR: '/var/www/html/.wp-cli/cache'
+    # Some "sleep" (waiting) is required so that the command is run after
+    # mysql is initialized. Depending on your machine this might take
+    # longer, then the sleep time has to be raised for it to work.
+    command: >
+      /bin/sh -c '
+      sleep 10;
+      wp core install --path="/var/www/html" --url="http://localhost:8000" --title="Local Wordpress By Docker" --admin_user=admin --admin_password=secret --admin_email=test@example.com;
+      wp theme install --activate twentytwentytwo;
+      mkdir -p /var/www/html/wp-content/plugins/gutenberg-incompatibility-status;
+      '
+    volumes:
+      - "./wp_data:/var/www/html"
+      - "./themes:/var/www/html/wp-content/themes"
+      - "./contact-form-inbox-report-mailer/trunk:/var/www/html/wp-content/plugins/contact-form-inbox-report-mailer"
+
+volumes:
+  db_data:
+  wp_data:

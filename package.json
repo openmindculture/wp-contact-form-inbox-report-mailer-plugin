@@ -1,0 +1,26 @@
+{
+  "name": "contact-form-inbox-report-mailer",
+  "version": "0.0.1",
+  "description": "WordPress plugin to send email reports of contact form inbox entries, including possible spam",
+  "scripts": {
+    "build:zip": "zip-build build dist --name contact-form-inbox-report-mailer --template %NAME%.%EXT%"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/openmindculture/wp-contact-form-inbox-report-mailer-plugin.git"
+  },
+  "keywords": [
+    "wordpress",
+    "wordpress-plugin"
+  ],
+  "author": "Ingo Steinke",
+  "license": "GPLv2 or later",
+  "bugs": {
+    "url": "https://github.com/openmindculture/wp-contact-form-inbox-report-mailer-plugin/issues"
+  },
+  "homepage": "https://github.com/openmindculture/wp-contact-form-inbox-report-mailer-plugin#readme",
+  "devDependencies": {
+    "docker-compose": "^0.24.2",
+    "zip-build": "^1.7.0"
+  }
+}
