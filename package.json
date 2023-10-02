@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "description": "WordPress plugin to send email reports of contact form inbox entries, including possible spam",
   "scripts": {
-    "build:zip": "zip-build build dist --name contact-form-inbox-report-mailer --template %NAME%.%EXT%"
+    "build:zip": "zip-build build dist --name openmindculture-contact-form-inbox-report-mailer --template %NAME%.%EXT%",
+	"eslint": "eslint --ext .js trunk/**/js",
+	"phpcs": "vendor/bin/phpcs --config-set installed_paths /vendor/wp-coding-standards/wpcs,wp-coding-standards/wpcs -extensions=php,inc,lib openmindculture-contact-form-inbox-report-mailer/trunk/*.php"
   },
   "repository": {
     "type": "git",
@@ -20,6 +22,8 @@
   },
   "homepage": "https://github.com/openmindculture/wp-contact-form-inbox-report-mailer-plugin#readme",
   "devDependencies": {
+    "@wordpress/eslint-plugin": "^16.0.0",
+	"eslint": "^8.48.0",
     "docker-compose": "^0.24.2",
     "zip-build": "^1.7.0"
   }

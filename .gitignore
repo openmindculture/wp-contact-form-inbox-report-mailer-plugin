@@ -5,8 +5,9 @@ data
 wordpress
 .wp-cli
 !.wp-cli/cache
+.wp_data
 wp_data
 .idea
 .svn
-contact-form-inbox-report-mailer/tags
+openmindculture-contact-form-inbox-report-mailer/tags
 
