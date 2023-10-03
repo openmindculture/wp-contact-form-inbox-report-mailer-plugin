@@ -1,43 +1,92 @@
 <?php
 
-function openmindculture_generate_report () {
-  $report = '';
-  // WP Query
-	// post type flamingo_inbound
-	// date >= -2d
-	//
-	// get
-	// from
-	// subject
-	// date
-	// post_status
-	//
-	// order by data, post_status
-	//
+function openmindculture_generate_report() {
+	$report = '';
 
-	?>
-	<h1><?php _e('Contact Form Inbox Report Mailer', 'openmindculture-openmindculture-contact-form-inbox-report-mailer'); ?></h1>
-	<table>
-		<?php 	// loop
-		?>
-		<tr>
-			<td><?php  esc_html( get_the_subject ); /* TODO get custom property */ ?></td>
-			<td><?php  esc_html( get_the_from ); /* TODO get custom property */ ?></td>
-			<td><?php  esc_html( get_the_date ); /* TODO get custom property */ ?></td>
-			<td><?php
-			if ( get_the_post_status === 'spam' ) :
-				echo '<b>spam?</b>';
+	$args = array(
+		'post_type'    => 'flamingo_inbound',
+		/*
+		'date_query'   => array(
+			'after'    => '-2 day',
+		), */
+		// 'orderby'        => array( 'date', 'post_status' ),
+		'order'          => 'DESC',
+		'posts_per_page' => -1,
+	);
+
+	$the_query = new WP_Query( $args );
+
+	if ( $the_query->have_posts() ) :
+		$report .= '<h1>';
+		$report .= esc_html(
+			'Contact Form Inbox Report Mailer',
+			'openmindculture-openmindculture-contact-form-inbox-report-mailer'
+		);
+		$report .= '</h1>';
+		$report .= '<table>';
+		$report .= '  <tr>';
+		$report .= '    <th>Subject</th>';
+		$report .= '    <th>From</th>';
+		$report .= '    <th>Date</th>';
+		$report .= '    <th>Spam?</th>';
+		$report .= '    <th></th>';
+		$report .= '  <tr>';
+
+		while ( $the_query->have_posts() ) :
+			$the_query->the_post();
+			$item_meta_subject     = get_post_meta( get_the_ID(), '_subject',     true );
+			$item_meta_from        = get_post_meta( get_the_ID(), '_from',        true );
+			$item_meta_from_email  = get_post_meta( get_the_ID(), '_from_email',  true );
+			$item_meta_post_status = get_post_meta( get_the_ID(), '_post_status', true );
+
+			$report .= '  <tr>';
+			$report .= '    <td>';
+
+			$report .= $item_meta_subject;
+
+			$report .= '    </td>';
+			$report .= '    <td>';
+
+			$report .= esc_html( $item_meta_from );
+
+			$report .= '    </td>';
+			$report .= '    <td>';
+			$report .= get_the_date();
+			$report .= '    </td>';
+			$report .= '    <td>';
+			if (strpos( $item_meta_post_status, 'spam' ) !== false) :
+				$report .= '      <b>spam?</b>';
 			endif;
-				?></td>
-		</tr>
-		<?php
-		?>
-	</table>
-	<?php _e('Automatic report sent from ', 'openmindculture-openmindculture-contact-form-inbox-report-mailer'); ?>
-	<!-- TODO current wordpress url -->
-	by the plugin Contact Form Inbox Report Mailer <!-- TODO add plugin version -->
-	<?php _e('Disable the plugin to unsubscribe.', 'openmindculture-openmindculture-contact-form-inbox-report-mailer'); ?>
-
-	<?php
-    return report;
+			$report .= '    </td>';
+			$report .= '    <td>';
+			$report .= '<a href="';
+			$report .= get_site_url();
+			$report .= '/wp-admin/admin.php?page=flamingo_inbound&post=';
+			$report .= get_the_ID();
+			$report .= '&action=edit">view</a>';
+			$report .= '    </td>';
+			$report .= '  </tr>';
+		endwhile;
+		$report .= '</table>';
+		$report .= '<br>';
+		$report .= '<br>';
+	endif;
+	if ( !empty($report) ) {
+		$report .= esc_html(
+			'Automatic report sent from ',
+			'openmindculture-openmindculture-contact-form-inbox-report-mailer'
+		);
+		$report .= get_site_url();
+		$report .= ' ';
+		$report .= esc_html(
+			'by the plugin Contact Form Inbox Report Mailer',
+			'openmindculture-openmindculture-contact-form-inbox-report-mailer'
+		);
+		$report .= '.<br>';
+		$report .= esc_html(
+			'Disable the plugin to unsubscribe.',
+			'openmindculture-openmindculture-contact-form-inbox-report-mailer'
+		);
+	}
+	return $report;
 }

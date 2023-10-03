@@ -1,7 +1,7 @@
 <?php
 
 function openmindculture_cfirm_outputpage () {
-	require_once( plugin_dir_path( __FILE__ ) . 'includes/output-page.php' );
+	require_once( plugin_dir_path( __FILE__ ) . 'output-page.php');
 }
 function openmindculture_cfirm_add_menu() {
 	add_menu_page(
