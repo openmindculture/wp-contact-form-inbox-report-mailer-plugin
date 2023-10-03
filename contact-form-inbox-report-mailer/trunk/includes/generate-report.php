@@ -20,7 +20,7 @@ function openmindculture_generate_report() {
 		$report .= '<h1>';
 		$report .= esc_html(
 			'Contact Form Inbox Report Mailer',
-			'openmindculture-openmindculture-contact-form-inbox-report-mailer'
+			'contact-form-inbox-report-mailer'
 		);
 		$report .= '</h1>';
 		$report .= '<table>';
@@ -74,18 +74,18 @@ function openmindculture_generate_report() {
 	if ( !empty($report) ) {
 		$report .= esc_html(
 			'Automatic report sent from ',
-			'openmindculture-openmindculture-contact-form-inbox-report-mailer'
+			'contact-form-inbox-report-mailer'
 		);
 		$report .= get_site_url();
 		$report .= ' ';
 		$report .= esc_html(
 			'by the plugin Contact Form Inbox Report Mailer',
-			'openmindculture-openmindculture-contact-form-inbox-report-mailer'
+			'contact-form-inbox-report-mailer'
 		);
 		$report .= '.<br>';
 		$report .= esc_html(
 			'Disable the plugin to unsubscribe.',
-			'openmindculture-openmindculture-contact-form-inbox-report-mailer'
+			'contact-form-inbox-report-mailer'
 		);
 	}
 	return $report;

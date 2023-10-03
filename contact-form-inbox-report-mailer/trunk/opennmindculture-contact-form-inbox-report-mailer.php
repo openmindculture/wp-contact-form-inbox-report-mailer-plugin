@@ -1,17 +1,17 @@
 <?php
 /**
- * @package	openmindculture-openmindculture-contact-form-inbox-report-mailer
+ * @package	contact-form-inbox-report-mailer
  * @author	Ingo Steinke
- * @version 0.0.1
+ * @version 0.1.0
  *
  * @wordpress-plugin
+ * Version: 0.1.0
  * Plugin Name: Contact Form Inbox Report Mailer
- * Text Domain: openmindculture-openmindculture-contact-form-inbox-report-mailer
+ * Text Domain: contact-form-inbox-report-mailer
  * Domain Path: /languages
  * Plugin URI: https://github.com/openmindculture/wp-contact-form-inbox-report-mailer-plugin
  * Description: Contact Form Inbox Report Mailer sends email reports of contact form inbox entries, including possible spam.
  * Short Description: Sends email reports of contact form inbox entries, including possible spam.
- * Version: 0.0.1
  * Author: openmindculture
  * Author URI: https://wordpress.org/support/users/openmindculture/
  * Requires at least: 6.0
@@ -36,7 +36,7 @@ if ( is_admin() ) {
     }
 
 	function openmindculture_cfirm_load_plugin_textdomain() {
-		load_plugin_textdomain( 'openmindculture-openmindculture-contact-form-inbox-report-mailer', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
+		load_plugin_textdomain( 'contact-form-inbox-report-mailer', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
 	}
 	add_action( 'plugins_loaded', 'openmindculture_cfirm_load_plugin_textdomain' );
 

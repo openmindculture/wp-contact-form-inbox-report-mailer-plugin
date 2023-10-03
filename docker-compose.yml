@@ -30,7 +30,7 @@ services:
     volumes:
       - "./wp_data:/var/www/html"
       - "./themes:/var/www/html/wp-content/themes"
-      - "./openmindculture-contact-form-inbox-report-mailer/trunk:/var/www/html/wp-content/plugins/openmindculture-contact-form-inbox-report-mailer"
+      - "./contact-form-inbox-report-mailer/trunk:/var/www/html/wp-content/plugins/contact-form-inbox-report-mailer"
 
   wordpress-cli:
     container_name: 'local-wp-cli'
@@ -61,7 +61,7 @@ services:
     volumes:
       - "./wp_data:/var/www/html"
       - "./themes:/var/www/html/wp-content/themes"
-      - "./openmindculture-contact-form-inbox-report-mailer/trunk:/var/www/html/wp-content/plugins/openmindculture-contact-form-inbox-report-mailer"
+      - "./contact-form-inbox-report-mailer/trunk:/var/www/html/wp-content/plugins/contact-form-inbox-report-mailer"
 
 volumes:
   db_data:

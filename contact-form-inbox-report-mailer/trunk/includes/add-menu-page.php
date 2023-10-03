@@ -8,7 +8,7 @@ function openmindculture_cfirm_add_menu() {
 		'Contact Form Inbox Report Mailer', // page title
 		'Contact Form Inbox Report Mailer', // menu title
 		'publish_posts',                    // capability level
-		'openmindculture-openmindculture-contact-form-inbox-report-mailer', // text domain
+		'contact-form-inbox-report-mailer', // text domain
 		'openmindculture_cfirm_outputpage'   // callback
 	);
 }

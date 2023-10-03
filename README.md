@@ -2,7 +2,7 @@
 
 Contact Form Inbox Report Mailer sends email reports of Flamingo contact form inbox entries, including possible spam. The Flamingo plugin is required! Contact Form 7 and Aksimet are assumed. This is free software as-is with absolutely no warranty! Feel free to contribute on GitHub to report problems and add missing features!
 
-![Screenshot collage](openmindculture-contact-form-inbox-report-mailer/assets/banner-772x250.png)
+![Screenshot collage](contact-form-inbox-report-mailer/assets/banner-772x250.png)
 
 ## Usage
 
