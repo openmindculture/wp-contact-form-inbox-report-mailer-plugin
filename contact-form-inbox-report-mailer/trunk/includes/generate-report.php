@@ -98,7 +98,7 @@ function openmindculture_generate_report() {
 			OPENMINDCULTURE_CFIRM_TEXT_DOMAIN
 		);
 		$report .= esc_html(
-			'by the plugin Contact Form Inbox Report Mailer ',
+			'by the Contact Form Inbox Report Mailer ',
 			OPENMINDCULTURE_CFIRM_TEXT_DOMAIN
 		);
 		$report .= esc_html(
