@@ -28,6 +28,14 @@ function openmindculture_generate_report() {
 			'contact-form-inbox-report-mailer'
 		);
 		$report .= '</h1>';
+
+		$report .= esc_html(
+			'Possible spam has not been sent to your email inbox!',
+			OPENMINDCULTURE_CFIRM_TEXT_DOMAIN
+		);
+		$report .= '<br>';
+		$report .= '<br>';
+
 		$report .= '<table>';
 		$report .= '  <tr>';
 		$report .= '    <th>Date</th>';
@@ -86,20 +94,37 @@ function openmindculture_generate_report() {
 	endif;
 	if ( !empty($report) ) {
 		$report .= esc_html(
-			'Automatic report sent from ',
+			'This message was generated automatically ',
 			OPENMINDCULTURE_CFIRM_TEXT_DOMAIN
 		);
-		$report .= get_site_url();
-		$report .= ' ';
 		$report .= esc_html(
-			'by the plugin Contact Form Inbox Report Mailer',
+			'by the plugin Contact Form Inbox Report Mailer ',
 			OPENMINDCULTURE_CFIRM_TEXT_DOMAIN
 		);
-		$report .= '.<br>';
 		$report .= esc_html(
-			'Disable the plugin to unsubscribe.',
+			'WordPress plugin',
 			OPENMINDCULTURE_CFIRM_TEXT_DOMAIN
 		);
+		$report .= '.';
+		$report .= '<br>';
+
+		$report .= '<br>';
+		$report .= esc_html(
+			'To unsubscribe, edit the configuration or disable the plugin ',
+			OPENMINDCULTURE_CFIRM_TEXT_DOMAIN
+		);
+
+		$report .= '<a href="' . get_site_url() . '/wp-admin/plugins.php">';
+		$report .= esc_html(
+			'here',
+			OPENMINDCULTURE_CFIRM_TEXT_DOMAIN
+		);
+		$report .= ':';
+		$report .= '<br>';
+		$report .= get_site_url() . '/wp-admin/plugins.php';
+		$report .= '</a>';
+
+		$report .= '<br>';
 	}
 	return $report;
 }
