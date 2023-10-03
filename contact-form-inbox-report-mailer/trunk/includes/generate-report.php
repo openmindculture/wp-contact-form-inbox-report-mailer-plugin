@@ -24,7 +24,7 @@ function openmindculture_generate_report() {
 	if ( $the_query->have_posts() ) :
 		$report .= '<h1>';
 		$report .= esc_html(
-			'Contact Form Inbox Report Mailer',
+			'Contact Form Inbox Report',
 			'contact-form-inbox-report-mailer'
 		);
 		$report .= '</h1>';

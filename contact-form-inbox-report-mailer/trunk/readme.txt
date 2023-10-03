@@ -18,7 +18,8 @@ Currently, there are no settings.
 
 === Known Issues ===
 
-None yet, but see roadmap/todo list for missing features!
+- see roadmap/todo list for missing features!
+- mails not sent? verify schedule on the plugin page, (re)activate plugin to (re)schedule!
 
 === Development and Contribution ===
 

@@ -8,6 +8,8 @@ Contact Form Inbox Report Mailer sends email reports of Flamingo contact form in
 
 Install and activate the plugin.
 
+Verify the schedule on the plugin page, (re)activate plugin to (re)schedule, if necessary.
+
 ## Development
 
 ### Roadmap / TODO
