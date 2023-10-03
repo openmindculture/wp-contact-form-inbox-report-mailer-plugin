@@ -9,9 +9,8 @@ function openmindculture_cfirm_schedule() {
 	}
 }
 
-// hourly to test - TODO change to daily
 function openmindculture_cfirm_add_schedule_interval() {
 	if ( ! wp_next_scheduled( OPENMINDCULTURE_CFIRM_SCHEDULE_NAME ) ) {
-		wp_schedule_event( time(), 'hourly', OPENMINDCULTURE_CFIRM_SCHEDULE_NAME );
+		wp_schedule_event( time(), 'daily', OPENMINDCULTURE_CFIRM_SCHEDULE_NAME );
 	}
 }

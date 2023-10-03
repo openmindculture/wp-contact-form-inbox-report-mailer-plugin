@@ -11,7 +11,7 @@ function openmindculture_generate_report() {
 			'flamingo-spam'
 		),
 		'date_query'   => array(
-			'after'    => '-30 day', // TODO change to '-2 day' in production
+			'after'    => '-2 day',
 			'column' => 'post_date',
 		),
 		'orderby'        => array( 'date' ),
@@ -41,8 +41,6 @@ function openmindculture_generate_report() {
 			$the_query->the_post();
 			$item_meta_subject     = get_post_meta( get_the_ID(), '_subject',     true );
 			$item_meta_from        = get_post_meta( get_the_ID(), '_from',        true );
-			$item_meta_from_email  = get_post_meta( get_the_ID(), '_from_email',  true );
-			$item_meta_post_status = get_post_meta( get_the_ID(), '_post_status', true );
 
 			$report .= '  <tr>';
 

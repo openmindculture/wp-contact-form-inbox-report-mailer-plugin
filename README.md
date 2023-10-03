@@ -12,6 +12,7 @@ Install and activate the plugin.
 
 ### Roadmap / TODO
 
+- fix (linters and) WordPress coding style
 - release on WordPress.org
 - add WP URL to GitHub README, e.g. https://wordpress.org/plugins/contact-form-inbox-report-mailer/
 - configuration option for cron time interval
