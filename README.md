@@ -1,6 +1,6 @@
 # Contact Form Inbox Report Mailer
 
-Contact Form Inbox Report Mailer sends email reports of contact form inbox entries, including possible spam. Requires Contact Form 7 and Flamingo plugins! This is free software as-is with absolutely no warranty! Feel free to contribute on GitHub to report problems and add missing features!
+Contact Form Inbox Report Mailer sends email reports of Flamingo contact form inbox entries, including possible spam. The Flamingo plugin is required! Contact Form 7 and Aksimet are assumed. This is free software as-is with absolutely no warranty! Feel free to contribute on GitHub to report problems and add missing features!
 
 ![Screenshot collage](openmindculture-contact-form-inbox-report-mailer/assets/banner-772x250.png)
 
@@ -90,3 +90,17 @@ docker-compose up
 ```
 
 open http://localhost:8000/
+
+Install or update the Flamingo plugin.
+
+Technically, Contact Form 7 and Akismet are optional. All we need are the custom post types and fields created by Flamingo and some test data. You can export flamingo inbox entries from an existing production installation and import it into the local installation using WordPress importer (not pre-installed by default) or via a partial sqldump (for experienced developers).
+
+Ensure file ownership and permissions, if necessary, e.g.
+
+```
+chown -R www-data:www-data ./wp_data
+```
+
+### Build a zip distribution without SVN
+
+`npm run build:zip` creates a plugin archive file in the `dist` folder that can be uploaded as a WordPress plugin.
