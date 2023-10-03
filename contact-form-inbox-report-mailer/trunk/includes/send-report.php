@@ -1,9 +1,31 @@
 <?php
 
-function openmindculture_send_report () {
-	require_once( plugin_dir_path( __FILE__ ) . 'includes/generate-report.php' );
-	$report = openmindculture_generate_report ();
-	if ( $report && !empty( $report )) {
-		// mail $report
+function openmindculture_cfirm_send_report ( $openmindculture_cfirm_report ) {
+
+	$openmindculture_cfirm_mail_to = get_option( 'admin_email' );
+	$openmindculture_cfirm_mail_subject = 'Contact Form Inbox Report';
+	$openmindculture_cfirm_mail_headers = array();
+
+	$openmindculture_cfirm_mail_body = '<html>';
+	$openmindculture_cfirm_mail_body .= '<body>\n';
+	$openmindculture_cfirm_mail_body .= $openmindculture_cfirm_report;
+
+	if (  $openmindculture_cfirm_report && !empty(  $openmindculture_cfirm_report )) {
+		function openmindculture_cfirm_set_html_mail_content_type() {
+			return 'text/html';
+		}
+		add_filter( 'wp_mail_content_type', 'openmindculture_cfirm_set_html_mail_content_type' );
+
+		$openmindculture_cfirm_mail_sent = wp_mail(
+			$openmindculture_cfirm_mail_to,
+			$openmindculture_cfirm_mail_subject,
+			$openmindculture_cfirm_mail_body,
+			$openmindculture_cfirm_mail_headers
+		);
+
+		remove_filter( 'wp_mail_content_type', 'openmindculture_cfirm_set_html_mail_content_type' );
+
+		return $openmindculture_cfirm_mail_sent;
 	}
+	return false;
 }

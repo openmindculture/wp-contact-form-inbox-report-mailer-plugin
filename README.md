@@ -1,6 +1,6 @@
 # Contact Form Inbox Report Mailer
 
-Contact Form Inbox Report Mailer sends email reports of Flamingo contact form inbox entries, including possible spam. The Flamingo plugin is required! Contact Form 7 and Aksimet are assumed. This is free software as-is with absolutely no warranty! Feel free to contribute on GitHub to report problems and add missing features!
+Contact Form Inbox Report Mailer sends email reports of Flamingo contact form inbox entries, including possible spam. The Flamingo plugin is required! Contact Form 7 and Aksimet are assumed. An email will be sent to the default admin email adress every day, containing an inbox overview of the last 48 hours in HTML format. Configuration options will be added in upcoming releases. This plugin is free software, provided as-is with absolutely no warranty! Feel free to contribute on GitHub to report problems and add missing features!
 
 ![Screenshot collage](contact-form-inbox-report-mailer/assets/banner-772x250.png)
 
@@ -18,11 +18,13 @@ Install and activate the plugin.
 - configuration option for reported time interval
 - configuration option to include or omit non-spam messages
 - configuration option for alternative email recipient
+- configuration option for report mail from address
 - configuration option for report mail subject
 - configuration option for report style
 - link to message details views
 - localize text
-- make it work with other contact forms
+- send multipart/alternative mail body with optional HTML and plain text versions
+- make it work with other contact forms or database plugins
 
 ### Coding Guidelines
 
