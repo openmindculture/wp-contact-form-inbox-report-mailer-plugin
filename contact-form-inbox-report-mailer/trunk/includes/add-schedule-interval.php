@@ -1,19 +1,17 @@
 <?php
 
-// Be sure to add your schedule to the passed array, as shown in the example. If you simply return
-// only your own schedule array then you will potentially delete schedules created by other plugins.
-function openmindculture_cfirm_add_intervals( $schedules ) {
+function openmindculture_cfirm_schedule() {
+	require_once( plugin_dir_path( __FILE__ ) . 'generate-report.php' );
+	$report = openmindculture_generate_report ();
+	if ( $report && !empty( $report )) {
+		require_once( plugin_dir_path( __FILE__ ) . 'send-report.php' );
+		openmindculture_cfirm_send_report ( $report );
+	}
+}
 
-	require_once plugin_dir_path( __FILE__ ) . 'includes/send-report.php';
-
-	// add a 'weekly' interval
-	$schedules['weekly'] = array(
-		'interval' => 604800,
-		'display' => __('Once Weekly')
-	);
-	$schedules['monthly'] = array(
-		'interval' => 2635200,
-		'display' => __('Once a month')
-	);
-	return $schedules;
+// hourly to test - TODO change to daily
+function openmindculture_cfirm_add_schedule_interval() {
+	if ( ! wp_next_scheduled( OPENMINDCULTURE_CFIRM_SCHEDULE_NAME ) ) {
+		wp_schedule_event( time(), 'hourly', OPENMINDCULTURE_CFIRM_SCHEDULE_NAME );
+	}
 }

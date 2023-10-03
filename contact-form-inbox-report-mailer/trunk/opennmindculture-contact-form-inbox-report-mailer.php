@@ -20,20 +20,22 @@
  */
 
 if ( is_admin() ) {
-
-	// - receive = send emails or other notifications
-	//- regular = using a scheduler like wp-cron
-	//- reports = output a human-readable list
-	//- about inbound messages = query Flamingo database
+	
+	define( 'OPENMINDCULTURE_CFIRM_SCHEDULE_NAME', 'openmindculture_cfirm_schedule' );
 
 	require_once plugin_dir_path( __FILE__ ) . 'includes/add-menu-page.php';
 	require_once plugin_dir_path( __FILE__ ) . 'includes/add-schedule-interval.php';
+	require_once plugin_dir_path( __FILE__ ) . 'includes/remove-schedule-interval.php';
 
+	register_activation_hook(
+		__FILE__,
+		'openmindculture_cfirm_add_schedule_interval'
+	);
 
-
-	function openmindculture_cfirm_contact_form_inbox_report_mailer() {
-        add_filter( 'cron_schedules', 'openmindculture_cfirm_add_intervals' );
-    }
+	register_deactivation_hook(
+		__FILE__,
+		'openmindculture_cfirm_remove_schedule_interval'
+	);
 
 	function openmindculture_cfirm_load_plugin_textdomain() {
 		load_plugin_textdomain( 'contact-form-inbox-report-mailer', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
