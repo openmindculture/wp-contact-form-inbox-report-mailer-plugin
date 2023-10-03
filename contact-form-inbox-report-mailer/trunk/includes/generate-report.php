@@ -5,11 +5,11 @@ function openmindculture_generate_report() {
 
 	$args = array(
 		'post_type'    => 'flamingo_inbound',
-		/*
 		'date_query'   => array(
-			'after'    => '-2 day',
-		), */
-		// 'orderby'        => array( 'date', 'post_status' ),
+			'after'    => '-30 day', // TODO change to '-2 day' in production
+			'column' => 'post_date',
+		),
+		'orderby'        => array( 'date' ),
 		'order'          => 'DESC',
 		'posts_per_page' => -1,
 	);
@@ -74,18 +74,18 @@ function openmindculture_generate_report() {
 	if ( !empty($report) ) {
 		$report .= esc_html(
 			'Automatic report sent from ',
-			'contact-form-inbox-report-mailer'
+			OPENMINDCULTURE_CFIRM_TEXT_DOMAIN
 		);
 		$report .= get_site_url();
 		$report .= ' ';
 		$report .= esc_html(
 			'by the plugin Contact Form Inbox Report Mailer',
-			'contact-form-inbox-report-mailer'
+			OPENMINDCULTURE_CFIRM_TEXT_DOMAIN
 		);
 		$report .= '.<br>';
 		$report .= esc_html(
 			'Disable the plugin to unsubscribe.',
-			'contact-form-inbox-report-mailer'
+			OPENMINDCULTURE_CFIRM_TEXT_DOMAIN
 		);
 	}
 	return $report;

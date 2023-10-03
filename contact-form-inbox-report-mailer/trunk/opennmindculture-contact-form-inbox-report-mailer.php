@@ -20,7 +20,7 @@
  */
 
 if ( is_admin() ) {
-	
+	define( 'OPENMINDCULTURE_CFIRM_TEXT_DOMAIN', 'contact-form-inbox-report-mailer' );
 	define( 'OPENMINDCULTURE_CFIRM_SCHEDULE_NAME', 'openmindculture_cfirm_schedule' );
 
 	require_once plugin_dir_path( __FILE__ ) . 'includes/add-menu-page.php';
