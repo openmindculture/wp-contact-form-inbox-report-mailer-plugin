@@ -5,6 +5,11 @@ function openmindculture_generate_report() {
 
 	$args = array(
 		'post_type'    => 'flamingo_inbound',
+		'post_status' => array(
+			'publish',
+			'spam',
+			'flamingo-spam'
+		),
 		'date_query'   => array(
 			'after'    => '-30 day', // TODO change to '-2 day' in production
 			'column' => 'post_date',
@@ -25,11 +30,11 @@ function openmindculture_generate_report() {
 		$report .= '</h1>';
 		$report .= '<table>';
 		$report .= '  <tr>';
+		$report .= '    <th>Date</th>';
+		$report .= '    <th>Status</th>';
+		$report .= '    <th>Link</th>';
 		$report .= '    <th>Subject</th>';
 		$report .= '    <th>From</th>';
-		$report .= '    <th>Date</th>';
-		$report .= '    <th>Spam?</th>';
-		$report .= '    <th></th>';
 		$report .= '  <tr>';
 
 		while ( $the_query->have_posts() ) :
@@ -40,22 +45,15 @@ function openmindculture_generate_report() {
 			$item_meta_post_status = get_post_meta( get_the_ID(), '_post_status', true );
 
 			$report .= '  <tr>';
-			$report .= '    <td>';
 
-			$report .= $item_meta_subject;
-
-			$report .= '    </td>';
-			$report .= '    <td>';
-
-			$report .= esc_html( $item_meta_from );
-
-			$report .= '    </td>';
 			$report .= '    <td>';
 			$report .= get_the_date();
 			$report .= '    </td>';
 			$report .= '    <td>';
-			if (strpos( $item_meta_post_status, 'spam' ) !== false) :
-				$report .= '      <b>spam?</b>';
+			if ( get_post_status() == 'spam' || get_post_status() == 'flamingo-spam' ) :
+				$report .= '<b>spam</b>';
+			elseif ( get_post_status() == 'publish' ) :
+				$report .= 'sent';
 			endif;
 			$report .= '    </td>';
 			$report .= '    <td>';
@@ -64,6 +62,23 @@ function openmindculture_generate_report() {
 			$report .= '/wp-admin/admin.php?page=flamingo_inbound&post=';
 			$report .= get_the_ID();
 			$report .= '&action=edit">view</a>';
+			$report .= '    </td>';
+
+			$report .= '    <td>';
+
+			$report .= $item_meta_subject;
+			if ( empty( $item_meta_subject ) ) :
+				$report .= '-';
+			endif;
+
+			$report .= '    </td>';
+			$report .= '    <td>';
+
+			$report .= esc_html( $item_meta_from );
+			if ( empty( $item_meta_from ) ) :
+				$report .= '-';
+			endif;
+
 			$report .= '    </td>';
 			$report .= '  </tr>';
 		endwhile;
