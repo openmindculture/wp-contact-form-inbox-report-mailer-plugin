@@ -14,6 +14,10 @@ function openmindculture_cfirm_schedule() {
 
 function openmindculture_cfirm_add_schedule_interval() {
 	if ( ! wp_next_scheduled( OPENMINDCULTURE_CFIRM_SCHEDULE_NAME ) ) {
-		wp_schedule_event( time(), 'hourly', OPENMINDCULTURE_CFIRM_SCHEDULE_NAME ); // TODO make daily
+		$openmindculture_cfirm_interval = 'hourly'; // TODO make daily
+		if ( !empty( get_option( 'openmindculture_cfirm_interval' ) ) ) {
+			$openmindculture_cfirm_interval = get_option( 'openmindculture_cfirm_interval' );
+		}
+		wp_schedule_event( time(), $openmindculture_cfirm_interval, OPENMINDCULTURE_CFIRM_SCHEDULE_NAME );
 	}
 }

@@ -1,6 +1,15 @@
 # Contact Form Inbox Report Mailer
 
-Contact Form Inbox Report Mailer sends email reports of Flamingo contact form inbox entries, including possible spam. The Flamingo plugin is required! Contact Form 7 and Aksimet are assumed. An email will be sent to the default admin email adress every day, containing an inbox overview of the last 48 hours in HTML format. Configuration options will be added in upcoming releases. This plugin is free software, provided as-is with absolutely no warranty! Feel free to contribute on GitHub to report problems and add missing features!
+Contact Form Inbox Report Mailer sends email reports of Flamingo contact form inbox entries, including possible spam.
+The [Flamingo](https://wordpress.org/plugins/flamingo/) plugin is required!
+[Contact Form 7](https://wordpress.org/plugins/contact-form-7/) and [Akismet](https://wordpress.org/plugins/akismet/) are assumed. 
+By default, an email will be sent to the default admin email adress every day,
+containing an inbox overview of the last 48 hours in HTML format. 
+More configuration options will be added in upcoming releases.
+Do not rely on interval times on pages with low traffic, as WordPress task schedule relies on regular page visits!
+After changing schedule settings, (re)activate the plugin to (re)schedule if necessary.
+This plugin is free software, provided as-is with absolutely no warranty!
+Feel free to contribute on GitHub to report problems and add missing features!
 
 ![Screenshot collage](contact-form-inbox-report-mailer/assets/banner-772x250.png)
 
@@ -14,19 +23,24 @@ Verify the schedule on the plugin page, (re)activate plugin to (re)schedule, if 
 
 ### Roadmap / TODO
 
-- fix (linters and) WordPress coding style
-- release on WordPress.org
-- add WP URL to GitHub README, e.g. https://wordpress.org/plugins/contact-form-inbox-report-mailer/
-- configuration option for cron time interval
-- configuration option for reported time interval
 - configuration option to include or omit non-spam messages
 - configuration option for alternative email recipient
 - configuration option for report mail from address
 - configuration option for report mail subject
 - configuration option for report style
+- fix (linters and) WordPress coding style
+- release on WordPress.org
+- add WP URL to GitHub README
 - localize text
 - send multipart/alternative mail body with optional HTML and plain text versions
 - make it work with other contact forms or database plugins
+
+### Related links and issues
+
+- [Flamingo Spam Reports](https://wordpress.org/support/topic/flamingo-spam-reports/)
+- [Requirements, structure, and code notes #1](https://github.com/openmindculture/wp-contact-form-inbox-report-mailer-plugin/issues/1)
+- [Contact Form Spam Protection and Email Addresses on Websites](https://dev.to/ingosteinke/e-mail-adresses-and-contact-form-spam-protection-496c)
+- [WP schedule event role and permissions (capabilities)](https://dev.to/ingosteinke/wp-schedule-event-role-and-permissions-da7)
 
 ### Coding Guidelines
 

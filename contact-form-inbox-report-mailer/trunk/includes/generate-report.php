@@ -2,6 +2,10 @@
 
 function openmindculture_generate_report() {
 	$report = '';
+	$openmindculture_cfirm_range = '-2 day';
+	if ( !empty( get_option( 'openmindculture_cfirm_range' ) ) ) {
+		$openmindculture_cfirm_range = get_option( 'openmindculture_cfirm_range' );
+	}
 
 	$args = array(
 		'post_type'    => 'flamingo_inbound',
@@ -11,7 +15,7 @@ function openmindculture_generate_report() {
 			'flamingo-spam'
 		),
 		'date_query'   => array(
-			'after'    => '-2 day',
+			'after'    => $openmindculture_cfirm_range,
 			'column' => 'post_date',
 		),
 		'orderby'        => array( 'date' ),

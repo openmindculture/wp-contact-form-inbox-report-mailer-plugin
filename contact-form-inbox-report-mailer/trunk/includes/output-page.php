@@ -5,15 +5,25 @@ echo '<div class="openmindculture__cfirm__wrap">';
 echo '<br>';
 
 echo '  <div class="openmindculture__cfirm__card">';
-echo 'Next scheduled email report: ';
+echo esc_html(
+	'Next scheduled email report: ',
+	OPENMINDCULTURE_CFIRM_TEXT_DOMAIN
+);
 if (wp_next_scheduled( OPENMINDCULTURE_CFIRM_SCHEDULE_NAME )) {
 	$openmindculture_cfirm_next_scheduled_time = wp_next_scheduled( OPENMINDCULTURE_CFIRM_SCHEDULE_NAME );
 	echo get_date_from_gmt( date('Y-m-d H:i:s', $openmindculture_cfirm_next_scheduled_time ) );
-	echo ' (server time: ';
+	echo ' (';
+	echo esc_html(
+		'server time',
+		OPENMINDCULTURE_CFIRM_TEXT_DOMAIN
+	);
 	echo get_date_from_gmt( date('Y-m-d H:i:s' ) );
 	echo ')';
 } else {
-	echo 'not scheduled. (Re)activate the plugin to (re)schedule!';
+	echo esc_html(
+		'not scheduled. (Re)activate the plugin to (re)schedule!',
+		OPENMINDCULTURE_CFIRM_TEXT_DOMAIN
+	);
 }
 echo '  </div>';
 
@@ -24,10 +34,5 @@ echo '  <div class="openmindculture__cfirm__card">';
 				echo $report;
 			endif;
 echo '  </div>';
-
-echo 'DEBUG MODE: sending mail each time this page is loaded - TODO: remove!'; // TODO remove
-require_once( plugin_dir_path( __FILE__ ) . 'add-schedule-interval.php' );  // TODO remove
-$retval = openmindculture_cfirm_schedule();  // TODO remove
-if ($retval) { echo ' - SUCCESS'; } else { echo ' - FAIL'; }
 
 echo '</div>';

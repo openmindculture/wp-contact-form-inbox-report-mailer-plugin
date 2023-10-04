@@ -37,6 +37,14 @@ if ( is_admin() ) {
 		'openmindculture_cfirm_remove_schedule_interval'
 	);
 
+	function openmindculture_cfirm_on_admin_initialization() {
+		if ( isset( $_GET['settings-updated'] ) ) {
+			openmindculture_cfirm_remove_schedule_interval();
+			openmindculture_cfirm_add_schedule_interval();
+		}
+	}
+	add_action( 'admin_init', 'openmindculture_cfirm_on_admin_initialization' );
+
 	function openmindculture_cfirm_load_plugin_textdomain() {
 		load_plugin_textdomain( 'contact-form-inbox-report-mailer', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
 	}
