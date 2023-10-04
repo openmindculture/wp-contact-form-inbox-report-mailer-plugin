@@ -50,11 +50,11 @@ function openmindculture_cfirm_render_input_callback_interval($args) {
 
 function openmindculture_cfirm_render_input_callback_range($args) {
 	echo '<select name="' . $args[0] . '">';
-	echo '<option value="-1 week" "'  . selected( get_option( $args[0] ), '-1 week' ) . '">1 week</option>';
-	echo '<option value="-3 day" "'   . selected( get_option( $args[0] ), '-3 day' )  . '">3 days</option>';
 	echo '<option value="-2 day" "'   . selected( get_option( $args[0] ), '-2 day' )  . '">2 days</option>';
 	echo '<option value="-1 day" "'   . selected( get_option( $args[0] ), '-1 day' )  . '">1 day</option>';
-	echo '<option value="-20 hour" "' . selected( get_option( $args[0] ), '-1 day' )  . '">20 hours</option>';
+	echo '<option value="-12 hour" "' . selected( get_option( $args[0] ), '-1 day' )  . '">12 hours</option>';
+	echo '<option value="-3 day" "'   . selected( get_option( $args[0] ), '-3 day' )  . '">3 days</option>';
+	echo '<option value="-1 week" "'  . selected( get_option( $args[0] ), '-1 week' ) . '">1 week</option>';
 	echo '</select>';
 }
 
