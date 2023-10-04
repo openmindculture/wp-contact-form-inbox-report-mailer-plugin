@@ -24,7 +24,6 @@ Verify the schedule on the plugin page, (re)activate plugin to (re)schedule, if 
 - configuration option for report mail from address
 - configuration option for report mail subject
 - configuration option for report style
-- link to message details views
 - localize text
 - send multipart/alternative mail body with optional HTML and plain text versions
 - make it work with other contact forms or database plugins

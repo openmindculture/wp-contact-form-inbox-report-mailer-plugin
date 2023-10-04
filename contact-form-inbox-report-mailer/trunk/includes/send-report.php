@@ -2,6 +2,10 @@
 
 function openmindculture_cfirm_send_report ( $openmindculture_cfirm_report ) {
 
+	if ( empty( $openmindculture_cfirm_report ) ) {
+		$openmindculture_cfirm_report = 'Nothing to report, but the mail interval works.';
+	}
+
 	$openmindculture_cfirm_mail_to = get_option( 'admin_email' );
 	$openmindculture_cfirm_mail_subject = 'Contact Form Inbox Report';
 	$openmindculture_cfirm_mail_headers = array();

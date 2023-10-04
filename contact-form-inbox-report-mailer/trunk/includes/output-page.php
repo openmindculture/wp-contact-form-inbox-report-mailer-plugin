@@ -25,4 +25,9 @@ echo '  <div class="openmindculture__cfirm__card">';
 			endif;
 echo '  </div>';
 
+echo 'DEBUG MODE: sending mail each time this page is loaded - TODO: remove!'; // TODO remove
+require_once( plugin_dir_path( __FILE__ ) . 'add-schedule-interval.php' );  // TODO remove
+$retval = openmindculture_cfirm_schedule();  // TODO remove
+if ($retval) { echo ' - SUCCESS'; } else { echo ' - FAIL'; }
+
 echo '</div>';
