@@ -11,7 +11,7 @@ function openmindculture_cfirm_send_report ( $openmindculture_cfirm_report ) {
 	$openmindculture_cfirm_mail_headers = array();
 
 	$openmindculture_cfirm_mail_body = '<html>';
-	$openmindculture_cfirm_mail_body .= '<body>\n';
+	$openmindculture_cfirm_mail_body .= '<body>';
 	$openmindculture_cfirm_mail_body .= $openmindculture_cfirm_report;
 
 	if (  $openmindculture_cfirm_report && !empty(  $openmindculture_cfirm_report )) {
