@@ -42,19 +42,19 @@ add_action('admin_init', 'openmindculture_cfirm_settings_init');
 
 function openmindculture_cfirm_render_input_callback_interval($args) {
 	echo '<select name="' . $args[0] . '">';
-	echo '<option value="daily" "' . selected( get_option('myplugin_admin_bar'), 'daily' ) . '">daily</option>';
-	echo '<option value="twicedaily" "' . selected( get_option('myplugin_admin_bar'), 'twicedaily' ) . '">twicedaily</option>';
-	echo '<option value="hourly" "' . selected( get_option('myplugin_admin_bar'), 'hourly' ) . '">hourly</option>';
+	echo '<option value="daily" "'      . selected( get_option( $args[0] ), 'daily' )      . '">daily</option>';
+	echo '<option value="twicedaily" "' . selected( get_option( $args[0] ), 'twicedaily' ) . '">twicedaily</option>';
+	echo '<option value="hourly" "'     . selected( get_option( $args[0] ), 'hourly' )     . '">hourly</option>';
 	echo '</select>';
 }
 
 function openmindculture_cfirm_render_input_callback_range($args) {
 	echo '<select name="' . $args[0] . '">';
-	echo '<option value="-1 week" "' . selected( get_option('myplugin_admin_bar'), '-1 week' ) . '">1 week</option>';
-	echo '<option value="-3 day" "' . selected( get_option('myplugin_admin_bar'), '-3 day' ) . '">3 days</option>';
-	echo '<option value="-2 day" "' . selected( get_option('myplugin_admin_bar'), '-2 day' ) . '">2 days</option>';
-	echo '<option value="-1 day" "' . selected( get_option('myplugin_admin_bar'), '-1 day' ) . '">1 day</option>';
-	echo '<option value="-20 hour" "' . selected( get_option('myplugin_admin_bar'), '-1 day' ) . '">20 hours</option>';
+	echo '<option value="-1 week" "'  . selected( get_option( $args[0] ), '-1 week' ) . '">1 week</option>';
+	echo '<option value="-3 day" "'   . selected( get_option( $args[0] ), '-3 day' )  . '">3 days</option>';
+	echo '<option value="-2 day" "'   . selected( get_option( $args[0] ), '-2 day' )  . '">2 days</option>';
+	echo '<option value="-1 day" "'   . selected( get_option( $args[0] ), '-1 day' )  . '">1 day</option>';
+	echo '<option value="-20 hour" "' . selected( get_option( $args[0] ), '-1 day' )  . '">20 hours</option>';
 	echo '</select>';
 }
 

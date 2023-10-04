@@ -114,7 +114,19 @@ function openmindculture_generate_report() {
 
 		$report .= '<br>';
 		$report .= esc_html(
-			'To unsubscribe, edit the configuration or disable the plugin ',
+			'To unsubscribe, edit the',
+			OPENMINDCULTURE_CFIRM_TEXT_DOMAIN
+		);
+
+		$report .= ' <a href="' . get_site_url() . '/wp-admin/options-general.php#openmindculture-cfirm-settings">';
+		$report .= esc_html(
+			'configuration',
+			OPENMINDCULTURE_CFIRM_TEXT_DOMAIN
+		);
+		$report .= '</a> ';
+
+		$report .= esc_html(
+			'or disable the plugin ',
 			OPENMINDCULTURE_CFIRM_TEXT_DOMAIN
 		);
 

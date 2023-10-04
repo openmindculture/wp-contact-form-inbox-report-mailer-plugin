@@ -26,6 +26,7 @@ if ( is_admin() ) {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/add-menu-page.php';
 	require_once plugin_dir_path( __FILE__ ) . 'includes/add-schedule-interval.php';
 	require_once plugin_dir_path( __FILE__ ) . 'includes/remove-schedule-interval.php';
+	require_once plugin_dir_path( __FILE__ ) . 'includes/settings.php';
 
 	register_activation_hook(
 		__FILE__,
