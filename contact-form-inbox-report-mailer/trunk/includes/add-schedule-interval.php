@@ -1,7 +1,7 @@
 <?php
 
 function openmindculture_cfirm_schedule_callback( $arg ) {
-	set_transient( 'openmindculture_cfirm_transient_message', 'openmindculture_cfirm_schedule_callback');
+	add_action( 'admin_notices', 'openmindculture_cfirm_admin_notice__callback_success' );
 
 	$openmindculture_cfirm_report = '';
 
@@ -49,11 +49,43 @@ function openmindculture_cfirm_add_schedule_interval() {
 		$openmindculture_cfirm_scheduled = wp_schedule_event( time(), $openmindculture_cfirm_interval, OPENMINDCULTURE_CFIRM_SCHEDULE_NAME, $openmindculture_cfirm_args, true );
 		if (!$openmindculture_cfirm_scheduled || gettype($openmindculture_cfirm_scheduled)!=='boolean') {
 			echo 'failed to schedule sending, possible error: ' . $openmindculture_cfirm_scheduled;
-			set_transient( 'scheduled openmindculture_cfirm_transient_message',
-				'failed to schedule sending, possible error: ' . $openmindculture_cfirm_scheduled
-			);
+			add_action( 'admin_notices', 'openmindculture_cfirm_admin_notice__scheduled_error' );
 		} else {
-			set_transient( 'scheduled openmindculture_cfirm_transient_message', 'scheduled openmindculture callback');
+			add_action( 'admin_notices', 'openmindculture_cfirm_admin_notice__scheduled_success' );
 		}
+
+
 	}
+}
+
+function openmindculture_cfirm_admin_notice__scheduled_success() {
+	?>
+	<div class="notice notice-success is-dismissible">
+		<p><?php _e( 'openmindculture scheduled success', 'sample-text-domain' ); ?></p>
+	</div>
+	<?php
+}
+
+function openmindculture_cfirm_admin_notice__callback_success() {
+	?>
+	<div class="notice notice-success is-dismissible">
+		<p><?php _e( 'openmindculture callback success', 'sample-text-domain' ); ?></p>
+	</div>
+	<?php
+}
+
+function openmindculture_cfirm_admin_notice__callback_error() {
+	?>
+	<div class="notice notice-error is-dismissible">
+		<p><?php _e( 'openmindculture error', 'sample-text-domain' ); ?></p>
+	</div>
+	<?php
+}
+
+function openmindculture_cfirm_admin_notice__scheduled_error() {
+	?>
+	<div class="notice notice-error is-dismissible">
+		<p><?php _e( 'openmindculture error', 'sample-text-domain' ); ?></p>
+	</div>
+	<?php
 }
