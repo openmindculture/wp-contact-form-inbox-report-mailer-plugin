@@ -1,8 +1,15 @@
 <?php
 
 function openmindculture_cfirm_schedule_callback() {
-	require_once( plugin_dir_path( __FILE__ ) . 'generate-report.php' );
+	echo 'openmindculture_cfirm_schedule_callback';
+
 	$openmindculture_cfirm_report = '';
+
+	try {
+		require_once( plugin_dir_path( __FILE__ ) . 'generate-report.php' );
+	} catch(Exception $ex) {
+		$openmindculture_cfirm_report = 'Failed to require mail report function file: ' . $ex->getMessage();
+	}
 
 	try {
 		$u = new WP_User(3);
