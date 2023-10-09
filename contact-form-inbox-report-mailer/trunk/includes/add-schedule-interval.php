@@ -1,6 +1,6 @@
 <?php
 
-function openmindculture_cfirm_schedule_callback() {
+function openmindculture_cfirm_schedule_callback( $arg ) {
 	echo 'openmindculture_cfirm_schedule_callback';
 
 	$openmindculture_cfirm_report = '';
@@ -37,7 +37,7 @@ function openmindculture_cfirm_schedule_callback() {
 	}
 }
 
-add_action('openmindculture_cfirm_schedule', 'openmindculture_cfirm_schedule_callback', 10, 0);
+add_action('openmindculture_cfirm_schedule', 'openmindculture_cfirm_schedule_callback', 10, 1);
 
 function openmindculture_cfirm_add_schedule_interval() {
 	if ( ! wp_next_scheduled( OPENMINDCULTURE_CFIRM_SCHEDULE_NAME ) ) {
@@ -45,7 +45,8 @@ function openmindculture_cfirm_add_schedule_interval() {
 		if ( !empty( get_option( 'openmindculture_cfirm_interval' ) ) ) {
 			$openmindculture_cfirm_interval = get_option( 'openmindculture_cfirm_interval' );
 		}
-		$openmindculture_cfirm_scheduled = wp_schedule_event( time(), $openmindculture_cfirm_interval, OPENMINDCULTURE_CFIRM_SCHEDULE_NAME, [], true );
+		$openmindculture_cfirm_args = array( '' );
+		$openmindculture_cfirm_scheduled = wp_schedule_event( time(), $openmindculture_cfirm_interval, OPENMINDCULTURE_CFIRM_SCHEDULE_NAME, $openmindculture_cfirm_args, true );
 		if (!$openmindculture_cfirm_scheduled || gettype($openmindculture_cfirm_scheduled)!=='boolean') {
 			echo 'failed to schedule sending, possible error: ' . $openmindculture_cfirm_scheduled;
 		}

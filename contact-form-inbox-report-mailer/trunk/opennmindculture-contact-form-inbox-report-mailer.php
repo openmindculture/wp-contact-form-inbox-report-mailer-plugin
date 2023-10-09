@@ -2,10 +2,10 @@
 /**
  * @package	contact-form-inbox-report-mailer
  * @author	Ingo Steinke
- * @version 1.0.9
+ * @version 1.0.10
  *
  * @wordpress-plugin
- * Version: 1.0.9
+ * Version: 1.0.10
  * Plugin Name: Contact Form Inbox Report Mailer
  * Text Domain: contact-form-inbox-report-mailer
  * Domain Path: /languages
