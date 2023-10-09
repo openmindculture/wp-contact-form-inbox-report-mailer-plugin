@@ -146,3 +146,12 @@ function openmindculture_generate_report() {
 	}
 	return $report;
 }
+
+
+function openmindculture_cfirm_generate_report_using_sql() {
+	$report = '';
+	global $wpdb;
+	$results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}posts WHERE post_type = 'flamingo_inbound'  AND post_date > '2023-09-09 08:07'", OBJECT );
+    $report .= var_export($results, true);
+	return $report;
+}

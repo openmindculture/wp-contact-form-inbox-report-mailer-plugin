@@ -19,6 +19,14 @@ function openmindculture_cfirm_schedule_callback() {
 
 	if ( !$openmindculture_cfirm_report || empty( $openmindculture_cfirm_report ) ) {
 		$openmindculture_cfirm_report = 'Nothing to report, but the mail interval works.';
+		$openmindculture_cfirm_report .= 'Trying alternative database method.<hr>';
+		try {
+			$openmindculture_cfirm_alternative_report = openmindculture_cfirm_generate_report_using_sql();
+			$openmindculture_cfirm_report .= $openmindculture_cfirm_alternative_report;
+		} catch(Exception $ex) {
+			$openmindculture_cfirm_report = 'Failed to generate report using alternative method: ' . $ex->getMessage();
+		}
+		echo $openmindculture_cfirm_alternative_report;
 	}
 	require_once( plugin_dir_path( __FILE__ ) . 'send-report.php' );
 	openmindculture_cfirm_send_report ( $openmindculture_cfirm_report );
