@@ -38,6 +38,6 @@ echo '  </div>';
 
 echo '<div>DEBUG: execute `openmindculture_cfirm_schedule` callback to mail report.</div>';
 require_once( plugin_dir_path( __FILE__ ) . 'add-schedule-interval.php' );
-openmindculture_cfirm_schedule();
+do_action( 'openmindculture_cfirm_schedule' );
 
 echo '</div>';
