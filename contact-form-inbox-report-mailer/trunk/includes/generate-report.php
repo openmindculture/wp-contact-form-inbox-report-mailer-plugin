@@ -109,6 +109,8 @@ function openmindculture_generate_report() {
 			'WordPress plugin',
 			OPENMINDCULTURE_CFIRM_TEXT_DOMAIN
 		);
+		$report .= ' ' . OPENMINDCULTURE_CFIRM_PLUGIN_VERSION;
+		$report .= ' (current user ID: ' . get_current_user_id() . ')';
 		$report .= '.';
 		$report .= '<br>';
 

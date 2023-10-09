@@ -2,10 +2,10 @@
 /**
  * @package	contact-form-inbox-report-mailer
  * @author	Ingo Steinke
- * @version 1.0.0
+ * @version 1.0.5
  *
  * @wordpress-plugin
- * Version: 1.0.0
+ * Version: 1.0.5
  * Plugin Name: Contact Form Inbox Report Mailer
  * Text Domain: contact-form-inbox-report-mailer
  * Domain Path: /languages
@@ -21,7 +21,7 @@
 
 if ( is_admin() ) {
 	define( 'OPENMINDCULTURE_CFIRM_TEXT_DOMAIN', 'contact-form-inbox-report-mailer' );
-	define( 'OPENMINDCULTURE_CFIRM_SCHEDULE_NAME', 'openmindculture_cfirm_schedule' );
+	define( 'OPENMINDCULTURE_CFIRM_PLUGIN_VERSION', '1.0.3' );
 
 	require_once plugin_dir_path( __FILE__ ) . 'includes/add-menu-page.php';
 	require_once plugin_dir_path( __FILE__ ) . 'includes/add-schedule-interval.php';

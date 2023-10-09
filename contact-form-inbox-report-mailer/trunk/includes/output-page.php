@@ -9,14 +9,15 @@ echo esc_html(
 	'Next scheduled email report: ',
 	OPENMINDCULTURE_CFIRM_TEXT_DOMAIN
 );
-if (wp_next_scheduled( OPENMINDCULTURE_CFIRM_SCHEDULE_NAME )) {
-	$openmindculture_cfirm_next_scheduled_time = wp_next_scheduled( OPENMINDCULTURE_CFIRM_SCHEDULE_NAME );
+if (wp_next_scheduled( 'openmindculture_cfirm_schedule' )) {
+	$openmindculture_cfirm_next_scheduled_time = wp_next_scheduled( 'openmindculture_cfirm_schedule' );
 	echo get_date_from_gmt( date('Y-m-d H:i:s', $openmindculture_cfirm_next_scheduled_time ) );
 	echo ' (';
 	echo esc_html(
 		'server time',
 		OPENMINDCULTURE_CFIRM_TEXT_DOMAIN
 	);
+	echo ' ';
 	echo get_date_from_gmt( date('Y-m-d H:i:s' ) );
 	echo ')';
 } else {
@@ -34,5 +35,9 @@ echo '  <div class="openmindculture__cfirm__card">';
 				echo $report;
 			endif;
 echo '  </div>';
+
+echo '<div>DEBUG: execute `openmindculture_cfirm_schedule` callback to mail report.</div>';
+require_once( plugin_dir_path( __FILE__ ) . 'add-schedule-interval.php' );
+openmindculture_cfirm_schedule();
 
 echo '</div>';
