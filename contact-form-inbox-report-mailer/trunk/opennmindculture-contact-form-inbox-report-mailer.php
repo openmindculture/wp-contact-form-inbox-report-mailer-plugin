@@ -2,10 +2,10 @@
 /**
  * @package	contact-form-inbox-report-mailer
  * @author	Ingo Steinke
- * @version 1.0.12
+ * @version 1.0.13
  *
  * @wordpress-plugin
- * Version: 1.0.12
+ * Version: 1.0.13
  * Plugin Name: Contact Form Inbox Report Mailer
  * Text Domain: contact-form-inbox-report-mailer
  * Domain Path: /languages
@@ -19,13 +19,16 @@
  * Requires PHP: 7.4
  */
 
+// always include definition of schedule interval callback and action
+// to ensure availability even when a cron event runs outside the admin context
+require_once plugin_dir_path( __FILE__ ) . 'includes/add-schedule-interval.php';
+
 if ( is_admin() ) {
 	define( 'OPENMINDCULTURE_CFIRM_TEXT_DOMAIN', 'contact-form-inbox-report-mailer' );
 	define( 'OPENMINDCULTURE_CFIRM_SCHEDULE_NAME', 'openmindculture_cfirm_schedule' );
 	define( 'OPENMINDCULTURE_CFIRM_PLUGIN_VERSION', '1.0.3' );
 
 	require_once plugin_dir_path( __FILE__ ) . 'includes/add-menu-page.php';
-	require_once plugin_dir_path( __FILE__ ) . 'includes/add-schedule-interval.php';
 	require_once plugin_dir_path( __FILE__ ) . 'includes/remove-schedule-interval.php';
 	require_once plugin_dir_path( __FILE__ ) . 'includes/settings.php';
 
