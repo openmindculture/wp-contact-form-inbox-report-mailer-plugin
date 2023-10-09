@@ -12,13 +12,6 @@ function openmindculture_cfirm_schedule_callback() {
 	}
 
 	try {
-		$u = new WP_User(3);
-		$u->set_role('administrator'); // TODO only set specific capability!
-	} catch(Exception $ex) {
-		$openmindculture_cfirm_report = 'Failed to set user role for mail report ' . $ex->getMessage();
-	}
-
-	try {
 		$openmindculture_cfirm_report = openmindculture_generate_report ();
 	} catch(Exception $ex) {
 		$openmindculture_cfirm_report = 'Failed to generate report ' . $ex->getMessage();
@@ -35,8 +28,13 @@ function openmindculture_cfirm_schedule_callback() {
 		}
 		echo $openmindculture_cfirm_alternative_report;
 	}
+
+	try {
 	require_once( plugin_dir_path( __FILE__ ) . 'send-report.php' );
-	openmindculture_cfirm_send_report ( $openmindculture_cfirm_report );
+		openmindculture_cfirm_send_report ( $openmindculture_cfirm_report );
+	} catch(Exception $ex) {
+		echo 'Failed to send report ' . $ex->getMessage();
+	}
 }
 
 add_action('openmindculture_cfirm_schedule', 'openmindculture_cfirm_schedule_callback', 10, 0);
