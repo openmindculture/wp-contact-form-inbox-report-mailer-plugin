@@ -27,6 +27,16 @@ function openmindculture_cfirm_settings_init() {
 			'openmindculture_cfirm_range' // option field ID
 		)
 	);
+	add_settings_field(
+		'openmindculture_cfirm_recipient', // option field ID
+		'Send report to', // display title (default englisch)
+		'openmindculture_cfirm_render_input_callback_recipient', // generic input field renderer
+		'general', // settings page ID (where to render: default general settings page)
+		'openmindculture_cfirm_settings_section', // section inside settings page
+		array( // arguments passed to generic input field renderer
+			'openmindculture_cfirm_recipient' // option field ID
+		)
+	);
 	register_setting(
 		'general', // settings page ID (where to render: default general settings page)
 		'openmindculture_cfirm_interval', // id/Name of option
@@ -35,6 +45,11 @@ function openmindculture_cfirm_settings_init() {
 	register_setting(
 		'general', // settings page ID (where to render: default general settings page)
 		'openmindculture_cfirm_range', // id/Name of option
+		'esc_attr' // validation callback (built-in esc_attr)
+	);
+	register_setting(
+		'general', // settings page ID (where to render: default general settings page)
+		'openmindculture_cfirm_recipient', // id/Name of option
 		'esc_attr' // validation callback (built-in esc_attr)
 	);
 }
@@ -55,6 +70,20 @@ function openmindculture_cfirm_render_input_callback_range($args) {
 	echo '<option value="-12 hour" "' . selected( get_option( $args[0] ), '-1 day' )  . '">12 hours</option>';
 	echo '<option value="-3 day" "'   . selected( get_option( $args[0] ), '-3 day' )  . '">3 days</option>';
 	echo '<option value="-1 week" "'  . selected( get_option( $args[0] ), '-1 week' ) . '">1 week</option>';
+	echo '</select>';
+}
+
+function openmindculture_cfirm_render_input_callback_recipient($args) {
+	echo '<select name="' . $args[0] . '">';
+	$admin_users = get_users( array( 'role__in' => array( 'author', 'admin' ) ) );
+	foreach ( $admin_users as $admin_user ) {
+		echo '<span>' . esc_html( $admin_user->user_email ) . '</span>';
+		echo '<option value="';
+		echo esc_html( esc_html( $admin_user->user_email ) );
+		echo '" "'   . selected( get_option( $args[0] ), esc_html( $admin_user->user_email ) )  . '">';
+		echo esc_html( esc_html( $admin_user->user_email ) );
+		echo '</option>';
+	}
 	echo '</select>';
 }
 

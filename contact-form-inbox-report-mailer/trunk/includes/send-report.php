@@ -2,6 +2,9 @@
 
 function openmindculture_cfirm_send_report ( $openmindculture_cfirm_report ) {
 	$openmindculture_cfirm_mail_to = get_option( 'admin_email' );
+	if ( !empty( get_option( 'openmindculture_cfirm_recipient' ) ) ) {
+		$openmindculture_cfirm_mail_to = get_option( 'openmindculture_cfirm_recipient' );
+	}
 	$openmindculture_cfirm_mail_subject = 'Contact Form Inbox Report';
 	$openmindculture_cfirm_mail_headers = array();
 
