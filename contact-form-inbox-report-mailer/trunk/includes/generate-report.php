@@ -9,19 +9,20 @@ function openmindculture_generate_report() {
 		$openmindculture_cfirm_range = get_option( 'openmindculture_cfirm_range' );
 	}
 
-	$date_from = date('Y-m-d H:i', strtotime( $openmindculture_cfirm_range ));
 	$query = "SELECT * FROM {$wpdb->prefix}posts";
 	$query .= " WHERE ";
 	$query .= "post_type = 'flamingo_inbound'";
 	$query .= " AND ";
-	$query .= "post_date > '$date_from'";
+	$query .= "post_date > '";
+	$query .= date('Y-m-d', strtotime( $openmindculture_cfirm_range ));
+	$query .= "'";
 	$query .= " AND ";
 	$query .= "post_status IN (";
 	$query .= " 'publish',";
 	$query .= " 'spam',";
-	$query .= " 'flamingo-spam',";
+	$query .= " 'flamingo-spam'";
 	$query .= ")";
-	$query .= " ORDER BY date DESC";
+	$query .= " ORDER BY post_date DESC";
 
 	$results = $wpdb->get_results( $query, OBJECT );
 
