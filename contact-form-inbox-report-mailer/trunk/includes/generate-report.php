@@ -2,30 +2,32 @@
 
 function openmindculture_generate_report() {
 	$report = '';
+	global $wpdb;
+
 	$openmindculture_cfirm_range = '-2 day';
 	if ( !empty( get_option( 'openmindculture_cfirm_range' ) ) ) {
 		$openmindculture_cfirm_range = get_option( 'openmindculture_cfirm_range' );
 	}
 
-	$args = array(
-		'post_type'    => 'flamingo_inbound',
-		'post_status' => array(
-			'publish',
-			'spam',
-			'flamingo-spam'
-		),
-		'date_query'   => array(
-			'after'    => $openmindculture_cfirm_range,
-			'column' => 'post_date',
-		),
-		'orderby'        => array( 'date' ),
-		'order'          => 'DESC',
-		'posts_per_page' => -1,
-	);
+	$date_from = date('Y-m-d H:i', strtotime( $openmindculture_cfirm_range ));
+	$query = "SELECT * FROM {$wpdb->prefix}posts";
+	$query .= " WHERE ";
+	$query .= "post_type = 'flamingo_inbound'";
+	$query .= " AND ";
+	$query .= "post_date > '$date_from'";
+	$query .= " AND ";
+	$query .= "post_status IN (";
+	$query .= " 'publish',";
+	$query .= " 'spam',";
+	$query .= " 'flamingo-spam',";
+	$query .= ")";
+	$query .= " ORDER BY date DESC";
 
-	$the_query = new WP_Query( $args );
+	$results = $wpdb->get_results( $query, OBJECT );
 
-	if ( $the_query->have_posts() ) :
+	$report .= "using query: " . $query . "<br><hr>";
+
+	if ( sizeof( $results ) ) :
 		$report .= '<h1>';
 		$report .= esc_html(
 			'Contact Form Inbox Report',
@@ -47,22 +49,21 @@ function openmindculture_generate_report() {
 		$report .= '    <th>Link</th>';
 		$report .= '    <th>Subject</th>';
 		$report .= '    <th>From</th>';
-		$report .= '  <tr>';
+		$report .= '  </tr>';
 
-		while ( $the_query->have_posts() ) :
-			$the_query->the_post();
-			$item_meta_subject     = get_post_meta( get_the_ID(), '_subject',     true );
-			$item_meta_from        = get_post_meta( get_the_ID(), '_from',        true );
+		foreach ( (array) $results as $post_item ) {
+			$item_meta_subject     = get_post_meta( $post_item->ID, '_subject',     true );
+			$item_meta_from        = get_post_meta( $post_item->ID, '_from',        true );
 
 			$report .= '  <tr>';
-
 			$report .= '    <td>';
-			$report .= get_the_date();
+			$report .= $post_item->post_date;
+			get_the_date('', $post_item->ID);
 			$report .= '    </td>';
 			$report .= '    <td>';
-			if ( get_post_status() == 'spam' || get_post_status() == 'flamingo-spam' ) :
+			if ( $post_item->post_status == 'spam' || $post_item->post_status == 'flamingo-spam' ) :
 				$report .= '<b>spam</b>';
-			elseif ( get_post_status() == 'publish' ) :
+			elseif ( $post_item->post_status == 'publish' ) :
 				$report .= 'sent';
 			endif;
 			$report .= '    </td>';
@@ -70,28 +71,30 @@ function openmindculture_generate_report() {
 			$report .= '<a href="';
 			$report .= get_site_url();
 			$report .= '/wp-admin/admin.php?page=flamingo_inbound&post=';
-			$report .= get_the_ID();
+			$report .= $post_item->ID;
 			$report .= '&action=edit">view</a>';
 			$report .= '    </td>';
 
 			$report .= '    <td>';
-
-			$report .= $item_meta_subject;
-			if ( empty( $item_meta_subject ) ) :
+			if ( !empty( $item_meta_subject ) ) {
+				$report .= $item_meta_subject;
+			} else {
 				$report .= '-';
-			endif;
+			}
 
 			$report .= '    </td>';
 			$report .= '    <td>';
 
-			$report .= esc_html( $item_meta_from );
-			if ( empty( $item_meta_from ) ) :
+			if ( !empty( $item_meta_from ) ) {
+				$report .= $item_meta_from;
+			} else {
 				$report .= '-';
-			endif;
+			}
 
 			$report .= '    </td>';
 			$report .= '  </tr>';
-		endwhile;
+		}
+
 		$report .= '</table>';
 		$report .= '<br>';
 		$report .= '<br>';
@@ -150,68 +153,5 @@ function openmindculture_generate_report() {
 
 function openmindculture_cfirm_generate_report_using_sql() {
 	$report = '';
-	global $wpdb;
-	$results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}posts WHERE post_type = 'flamingo_inbound'  AND post_date > '2023-09-09 08:07'", OBJECT );
-    // $report .= var_export($results, true);
-	// array ( 0 => (object) array( 'ID' => '3295',
-	$report .= '<table>';
-	$report .= '  <tr>';
-	$report .= '    <th>Date</th>';
-	$report .= '    <th>Status</th>';
-	$report .= '    <th>Link</th>';
-	$report .= '    <th>Subject</th>';
-	$report .= '    <th>From</th>';
-	$report .= '  <tr>';
-	try {
-		// foreach($results as $value).
-		// Blöder Typo vor dem keiner warnt: $report ist doch meine Outputvariable,
-		// es muss natürlich $results sein
-		foreach ( (array) $results as $post_item ) {
-			$item_meta_subject     = get_post_meta( $post_item->ID, '_subject',     true );
-			$item_meta_from        = get_post_meta( $post_item->ID, '_from',        true );
-
-			$report .= '  <tr>';
-			$report .= '    <td>';
-			$report .= $post_item->post_date;
-			get_the_date('', $post_item->ID);
-			$report .= '    </td>';
-			$report .= '    <td>';
-			if ( $post_item->post_status == 'spam' || $post_item->post_status == 'flamingo-spam' ) :
-				$report .= '<b>spam</b>';
-			elseif ( $post_item->post_status == 'publish' ) :
-				$report .= 'sent';
-			endif;
-			$report .= '    </td>';
-			$report .= '    <td>';
-			$report .= '<a href="';
-			$report .= get_site_url();
-			$report .= '/wp-admin/admin.php?page=flamingo_inbound&post=';
-			$report .= $post_item->ID;
-			$report .= '&action=edit">view</a>';
-			$report .= '    </td>';
-
-			$report .= '    <td>';
-			if ( !empty( $item_meta_subject ) ) {
-				$report .= $item_meta_subject;
-			} else {
-				$report .= '-';
-			}
-
-			$report .= '    </td>';
-			$report .= '    <td>';
-
-			if ( !empty( $item_meta_from ) ) {
-				$report .= $item_meta_from;
-			} else {
-				$report .= '-';
-			}
-
-			$report .= '    </td>';
-			$report .= '  </tr>';
-		}
-	}  catch(Exception $ex) {
-		$report .= '<tr><td colspan=5">Failed to iterate SQL results: ' . $ex->getMessage() . '</td></tr>';
-	}
-	$report .= '</table>';
 	return $report;
 }
