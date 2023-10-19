@@ -1,6 +1,6 @@
 {
   "name": "contact-form-inbox-report-mailer",
-  "version": "1.0.20",
+  "version": "1.1.1",
   "description": "WordPress plugin to send email reports of contact form inbox entries, including possible spam",
   "scripts": {
     "build:zip": "rm -fr dist/* && zip-build contact-form-inbox-report-mailer/trunk dist --name contact-form-inbox-report-mailer --template %NAME%.%EXT%",

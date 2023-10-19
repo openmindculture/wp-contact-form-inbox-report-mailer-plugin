@@ -119,6 +119,16 @@ Ensure file ownership and permissions, if necessary, e.g.
 chown -R www-data:www-data ./wp_data
 ```
 
+#### debug local database
+
+```
+docker exec -it local-wp-db bash
+mysql -uowordpress_user -pwordpress_password
+use wordpress_db
+```
+
+Credentials must match the ones used in `docker-compose.yml`
+
 ### Build a zip distribution without SVN
 
 `npm run build:zip` creates a plugin archive file in the `dist` folder that can be uploaded as a WordPress plugin.

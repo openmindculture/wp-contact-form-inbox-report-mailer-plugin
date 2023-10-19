@@ -26,8 +26,6 @@ function openmindculture_generate_report() {
 
 	$results = $wpdb->get_results( $query, OBJECT );
 
-	$report .= "using query: " . $query . "<br><hr>";
-
 	if ( sizeof( $results ) ) :
 		$report .= '<h1>';
 		$report .= esc_html(
