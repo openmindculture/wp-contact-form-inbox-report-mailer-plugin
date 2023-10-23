@@ -12,7 +12,6 @@ echo '  <div class="openmindculture__cfirm__card">';
 			endif;
 echo '  </div>';
 
-echo '<div>DEBUG: execute `openmindculture_cfirm_schedule` callback to mail report.</div>';
 require_once( plugin_dir_path( __FILE__ ) . 'add-schedule-interval.php' );
 do_action( 'openmindculture_cfirm_schedule' );
 
