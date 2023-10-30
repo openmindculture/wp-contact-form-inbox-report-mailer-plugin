@@ -1,8 +1,8 @@
 <?php
 
-function openmindculture_cfirm_schedule_callback( $arg ) {
+function openmindculture_cfirm_scheduled_callback( $arg ) {
 	add_action( 'admin_notices', 'openmindculture_cfirm_admin_notice__callback_success' );
-
+    echo ' --openmindculture_cfirm_scheduled_callback-- ';
 	$openmindculture_cfirm_report = '';
 
 	try {
@@ -12,20 +12,22 @@ function openmindculture_cfirm_schedule_callback( $arg ) {
 	}
 
 	try {
-		$openmindculture_cfirm_report = openmindculture_generate_report ();
+		$openmindculture_cfirm_report = openmindculture_generate_report();
 	} catch(Exception $ex) {
 		$openmindculture_cfirm_report = 'Failed to generate report ' . $ex->getMessage();
 	}
 
 	try {
 	require_once( plugin_dir_path( __FILE__ ) . 'send-report.php' );
+	    echo 'Ready to send report.';
 		openmindculture_cfirm_send_report ( $openmindculture_cfirm_report );
+		echo '<hr>Report has been sent:<br>' . $openmindculture_cfirm_report;
 	} catch(Exception $ex) {
 		echo 'Failed to send report ' . $ex->getMessage();
 	}
 }
 
-add_action('openmindculture_cfirm_schedule', 'openmindculture_cfirm_schedule_callback', 10, 1);
+add_action('openmindculture_cfirm_schedule', 'openmindculture_cfirm_scheduled_callback', 10, 1);
 
 function openmindculture_cfirm_add_schedule_interval() {
 	if ( ! wp_next_scheduled( OPENMINDCULTURE_CFIRM_SCHEDULE_NAME ) ) {

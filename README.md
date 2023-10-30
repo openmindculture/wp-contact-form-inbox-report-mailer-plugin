@@ -19,6 +19,20 @@ Install and activate the plugin.
 
 Verify the schedule on the plugin page, (re)activate plugin to (re)schedule, if necessary.
 
+### Issues / Workarounds / Tuning
+
+#### Use a real cron job instead of WP_Cron scheduler
+
+If `WP_Cron` does not work reliably (due to caching plugins or low traffic), you can
+deactivate WP cron and use a real UNIX cron job to trigger wp-cron.php instead.
+
+- disable default WP_Cron system by adding to `wp-config.php`
+`define('DISABLE_WP_CRON', true);`
+- set up a unix cron job (not necessarily on the same machine) that executes
+`wget -q -O - https://example.com/wp-cron.php?doing_wp_cron >/dev/null 2>&1`
+- replace `example.com` with your actual domain
+- The plugin settings interval will have no more effect, other settings will still work.
+
 ## Development
 
 ### Roadmap / TODO
